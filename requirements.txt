@@ -1,0 +1,8 @@
+sqlite_database @ https://github.com/RimuEirnarn/sqlite_database/archive/refs/heads/main.zip
+colorful_string @ https://github.com/RimuEirnarn/colorful_string/archive/refs/heads/main.zip
+flask
+flask-login
+flask-wtf
+humanize
+argh
+tabulate

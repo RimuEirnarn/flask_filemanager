@@ -1,0 +1,5 @@
+debug=true
+host="0.0.0.0"
+port=5000
+threaded=true
+SECRET_KEY='<token>'

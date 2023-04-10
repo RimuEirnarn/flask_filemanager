@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+    <head>
+        {%- include '_head.html' %}
+    </head>
+
+    <body>
+        {%- include '_navbar.html' %}
+        <main class='container mt-6'>
+            {%- include '_flash.html' %}
+            <h2>File Manager</h2>
+            <nav aria-label='breadcrumb' class='fs-4'>
+                <ol class='breadcrumb'>
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none">{{ current_user.name }}</a>
+                    </li>
+                    {%- for crumb in crumbs %}
+                    <li class="breadcrumb-item"><a href="/files/{{ make_crumb(crumb, crumbs) }}"
+                            class='text-decoration-none'>{{ crumb }}</a>
+                    </li>
+                    {%- endfor %}
+                </ol>
+            </nav>
+
+            <div class="list-group" id='files'>
+                <div
+                    class='list-group-item list-group-item-info text-reset bg-body-tertiary btn-outline-dark d-flex justify-content-between'>
+                    <a class='disabled text-light text-decoration-none fs-4'>Files</a>
+                    <a class='btn btn-primary' href='?upload=true'><i class="bi bi-cloud-arrow-up"></i> Upload</a>
+                </div>
+                {%- for index, file in enumerate(files) %}
+                <div class='list-group-item list-group-item-action'>
+                    <div class='row'>
+                        <a href="/files{{ make_path(cwd, file.path) }}"
+                            class='text-decoration-none text-primary col-sm-10'><span class='text-secondary'>{%-if
+                                file.isfile %}<i class="bi bi-file-earmark-fill"></i> {%- elif file.isdir %}<i
+                                    class="bi bi-folder-fill"></i> {%- endif%}</span> {{
+                            file.name
+                            }}{% if file.isfile %} ({{ file.size }}){%- elif file.isdir %}/{%- endif %}</a>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <button class='btn btn-outline-danger btn-sm' data-index='{{ index+1 }}'
+                                        data-path='{{ make_path(cwd, file.path) }}'><i class="bi bi-trash"></i>
+                                        Delete</button>
+                                </div>
+                                <div class='col-md-auto'>
+                                    {{
+                                    file.created_at }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%- else %}
+                <div class='list-group-item list-group-item-action disabled'>
+                    <span class="text-primary">Empty directory</span>
+                </div>
+                {%- endfor %}
+            </div>
+            <br>
+        </main>
+    </body>
+
+</html>

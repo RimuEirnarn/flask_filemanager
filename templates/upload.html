@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+    <head>
+        {%- include '_head.html' %}
+    </head>
+
+    <body>
+        {%- include '_navbar.html' %}
+        <main class='container mt-6'>
+            {%- include '_flash.html' %}
+            <h2>Upload file at <a class='text-reset text-decoration-none' href='/files/{{cwd}}'>/{{ cwd }}</a></h2>
+            <form action="{{ request.url}}" method='POST' enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Choose file</label>
+                    <input type="file" class="form-control" name="file" id="file" placeholder=""
+                        aria-describedby="fileHelpId">
+                    <div id="fileHelpId" class="form-text">You can upload any files</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </main>
+    </body>
+
+</html>

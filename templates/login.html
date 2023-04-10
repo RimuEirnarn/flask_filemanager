@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+    <head>
+        {%- include '_head.html' %}
+    </head>
+
+    <body>
+        {%- include '_navbar.html' %}
+        <main class='container mt-6'>
+            {%- include '_flash.html' %}
+            <h2>Login to {{ systemname }}</h2>
+            <form action="/login" method="POST" class="">
+                {{ form.csrf_token }}
+
+                <div class="mb-3">
+                    <label for="username" class='form-label'>Username</label>
+                    {{ form.username(class_="form-control",placeholder="Username")}}
+                    {%- if form.username.errors %}
+                    <div class="invalid-feedback">
+                        {%- for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                        {%- endfor%}
+                    </div>
+                    {%- endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    {{ form.password(class_="form-control",placeholder="Password")}}
+
+                    {%- if form.password.errors %}
+                    <div class="invalid-feedback">
+                        {%- for error in form.password.errors %}
+                        {{ error }}
+                        {%- endfor %}
+                    </div>
+                    {%- endif %}
+                </div>
+
+                <button type="submit" class="btn btn-block btn-primary mb-3">
+                    Submit
+                </button>
+
+        </main>
+    </body>
+
+</html>
