@@ -171,5 +171,4 @@ if __name__ == "__main__":
     port = app.config.get("port", 5000)
     debug = app.config.get("debug", False)
     threaded = app.config.get("threaded", True)
-    print(host, port, debug, threaded)
     app.run(host, port, debug=debug, threaded=threaded)
